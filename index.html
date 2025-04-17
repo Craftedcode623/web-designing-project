@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Sharing Platform</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+    header {
+      background-color: #ff6b6b;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0.5rem 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .recipe-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .recipe-card h2 {
+      margin-top: 0;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 0.7rem 1.2rem;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff4c4c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Recipe Sharing Platform</h1>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#submit">Submit Recipe</a>
+    <a href="#saved">Saved Recipes</a>
+  </nav>
+  <div class="container">
+    <section id="submit">
+      <h2>Submit a New Recipe</h2>
+      <div class="form-group">
+        <label for="title">Recipe Title</label>
+        <input type="text" id="title">
+      </div>
+      <div class="form-group">
+        <label for="ingredients">Ingredients</label>
+        <textarea id="ingredients"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="instructions">Instructions</label>
+        <textarea id="instructions"></textarea>
+      </div>
+      <button onclick="addRecipe()">Add Recipe</button>
+    </section>
+
+    <section id="recipes">
+      <h2>Discover Recipes</h2>
+      <div id="recipe-list"></div>
+    </section>
+  </div>
+
+  <script>
+    const recipeList = document.getElementById('recipe-list');
+
+    function addRecipe() {
+      const title = document.getElementById('title').value;
+      const ingredients = document.getElementById('ingredients').value;
+      const instructions = document.getElementById('instructions').value;
+
+      const recipeCard = document.createElement('div');
+      recipeCard.className = 'recipe-card';
+      recipeCard.innerHTML = `
+        <h2>${title}</h2>
+        <p><strong>Ingredients:</strong><br>${ingredients.replace(/\n/g, '<br>')}</p>
+        <p><strong>Instructions:</strong><br>${instructions.replace(/\n/g, '<br>')}</p>
+      `;
+
+      recipeList.prepend(recipeCard);
+
+      // Reset form
+      document.getElementById('title').value = '';
+      document.getElementById('ingredients').value = '';
+      document.getElementById('instructions').value = '';
+    }
+  </script>
+</body>
+</html>
